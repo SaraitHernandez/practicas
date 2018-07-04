@@ -1,0 +1,42 @@
+1)
+una librería de lista.
+
+
+
+struct list{
+    ...
+}
+
+(internamente necesitarás otro struct de list_node, sin embargo esto será invisible para cualquier uso externo de la lista, cualquier algoritmo que necesite la lista puede usarla solo viendo a list y las funciones, es decir, la struct de node solo la usarás tú para implementar las funciones, pera a la hora de usar la lista debe bastar con llamar las funciones sin enterarse de que abajo hay struct de nodes y qué forma tienen)
+
+T será el tipo que guardarán los nodos, no debería importar, pon enteros pero debería ser trivial de cambiar :)
+
+funciones de:
+
+void list_add_front(list* l, T data); // agrega al inicio de la lista
+
+T list_front(list* l); // devuelve primer elemento de la lista
+
+T list_pop_front(list* l); // quita el primer elemento (y regresa su valor)
+
+void list_print(list* l); // imprime la lista a stdout (más que todo para que puedas probar tus funciones;))
+
+int list_size(list* l);
+
+void list_add_back(list* l, T data); // agrega al final
+
+T list_back(list* l); // devuelve último elemento de la lista
+
+T list_pop_back(list* l) // quita el último elemento (y regresa su valor)
+
+void list_clear(list* l); // limpia la lista
+
+Para todas las funciones que requieran ver el valor de un elemento (las que ven o quitan un elemento) suponen que hay un elemento, puedes no manejar el caso en donde está vacía, suponemos que serán llamadas sólo cuando tenga sentido.
+
+todas las funciones que crean o borran algún nodo de la lista deben hacer el trabajo de memoría dinámica (malloc/free).
+
+En principio, hazlo como puedas, no pienses demasiado en la complejidad, cualquier programa (o intento) será buena práctica, sin embargo la mejoraremos cumpliendo:
+list_clear() debe tomar O(n), donde n es el número de elementos en la lista.
+Todas las demás funciones deben ser O(1), (ver qué cosas guardar en el struct list para soportar esas operaciones en ese tiempo).
+
+Insisto, no te tranques con eso, mejor irlas mejorando
