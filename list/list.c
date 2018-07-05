@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct {
+typedef struct _node {
 	int data;
-	struct node *next;
+	struct _node *next;
 }node;
 
 typedef struct{
@@ -23,9 +23,9 @@ void list_clear(list* l); // limpia la lista
 
 int main()
 {
-	list *lista;
-	lista = malloc(sizeof(lista));
-	printf("lista size: %d\n",lista->size);
+	list lista;
+	
+	printf("list size: %d\n",lista.size);
 
 	return 0;
 }
@@ -89,43 +89,38 @@ int list_pop_back(list* l)
 void list_add_front(list* l, int data)
 {
 	node *new;
-	if((new = malloc(sizeof(node))) == NULL)
-		printf("error malloc\n");
+	new = malloc(sizeof(node));
+		
+	new->data = data;
+
+	if(l->size > 0)
+		new->next = l->head;
 	else
 	{
-		new->data = data;
-
-		if(l->size > 0)
-			new->next = l->head;
-		else
-		{
-			l->end = new;
-			new->next = NULL;
-		}
-
-		l->head = new;
-		(l->size)++;
+		l->end = new;
+		new->next = NULL;
 	}
+
+	l->head = new;
+	(l->size)++;
+	
 }
 
 void list_add_back(list* l, int data)
 {
 	node *new;
-	if((new = malloc(sizeof(node))) == NULL)
-		printf("error malloc\n");
-	else
-	{
-		new->data = data;
-		
-		if(l->size > 0)
-			l->end->next = new;
-		else
-			l->head = new;
+	new = malloc(sizeof(node));
 
-		new->next=NULL;
-		l->end = new;
-		(l->size)++;
-	}
+	new->data = data;
+	
+	if(l->size > 0)
+		l->end->next = new;
+	else
+		l->head = new;
+
+	new->next=NULL;
+	l->end = new;
+	(l->size)++;
 }
 
 void list_clear(list* l)
